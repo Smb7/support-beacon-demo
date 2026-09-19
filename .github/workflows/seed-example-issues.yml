@@ -1,0 +1,53 @@
+name: Seed example Support Beacon issues
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        report:
+          - title: Checkout calendar accepts yesterday
+            body: Choosing a check-in date in the past still lets me search rooms. The Harbor King card stays bookable.
+            type: bug
+          - title: Garden Queen photo is a color block on mobile
+            body: On a 390px viewport the Garden Queen card shows only the green swatch. Guests asked if the room photo failed to load.
+            type: bug
+          - title: Add a pet-friendly stay filter
+            body: Several callers ask whether dogs are allowed. A filter on the booking bar would save the front desk the same question.
+            type: feature
+          - title: Can Harbor King do a 1pm late checkout?
+            body: Anniversary stay next month. Need to know if late checkout is possible before we book the third night.
+            type: question
+    steps:
+      - name: Skip if this title already exists
+        id: skip
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `[Support] ${{ matrix.report.title }}`;
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "all",
+              per_page: 100,
+            });
+            const found = issues.data.some((issue) => issue.title === title);
+            core.setOutput("exists", found ? "true" : "false");
+
+      - name: Create issue with Support Beacon
+        if: steps.skip.outputs.exists != 'true'
+        uses: Smb7/support-beacon@feat/create-issue-payload
+        with:
+          mode: create-issue
+          labels: support,demo
+          payload: ${{ toJson(matrix.report) }}
