@@ -2,7 +2,7 @@ services:
   backend:
     build: ./backend
     environment:
-      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      SUPPORT_BEACON_TOKEN: ${SUPPORT_BEACON_TOKEN:-}
       GITHUB_OWNER: ${GITHUB_OWNER:-Smb7}
       GITHUB_REPO: ${GITHUB_REPO:-support-beacon-demo}
       GITHUB_DISPATCH: ${GITHUB_DISPATCH:-false}

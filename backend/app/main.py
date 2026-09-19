@@ -12,7 +12,7 @@ from .data import ROOMS
 
 
 class Settings(BaseSettings):
-    github_token: str = ""
+    support_beacon_token: str = ""
     github_owner: str = "Smb7"
     github_repo: str = "support-beacon-demo"
     github_dispatch: bool = False
@@ -149,14 +149,17 @@ async def create_support(payload: SupportIn):
         "github": None,
         "created_at": datetime.utcnow().isoformat() + "Z",
     }
-    if settings.github_token:
-        record["github"] = await publish_github(record)
+    if settings.support_beacon_token:
+        try:
+            record["github"] = await publish_github(record)
+        except Exception as exc:
+            record["github"] = {"error": str(exc)}
     reports.append(record)
     return {"ok": True, "id": record["id"], "github": record["github"]}
 
 
 async def publish_github(record: dict) -> dict:
-    owner, repo, token = settings.github_owner, settings.github_repo, settings.github_token
+    owner, repo, token = settings.github_owner, settings.github_repo, settings.support_beacon_token
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github+json",
