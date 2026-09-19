@@ -1,0 +1,38 @@
+ROOMS = [
+    {
+        "id": "harbor-king",
+        "name": "Harbor King",
+        "sleeps": 2,
+        "price": 285,
+        "tone": "#1c3a4a",
+        "blurb": "King bed, bay window, and a clawfoot tub facing the headland.",
+        "amenities": ["King bed", "Harbor view", "Soaking tub"],
+    },
+    {
+        "id": "garden-queen",
+        "name": "Garden Queen",
+        "sleeps": 2,
+        "price": 240,
+        "tone": "#2d4a32",
+        "blurb": "Queen bed opening onto the rosemary courtyard. Quiet after nine.",
+        "amenities": ["Queen bed", "Garden door", "Rain shower"],
+    },
+    {
+        "id": "cedar-loft",
+        "name": "Cedar Loft",
+        "sleeps": 4,
+        "price": 360,
+        "tone": "#4a3424",
+        "blurb": "Sleeps four: loft twins above, king below, wood stove for fog nights.",
+        "amenities": ["King + twins", "Wood stove", "Private deck"],
+    },
+    {
+        "id": "salt-room",
+        "name": "Salt Room",
+        "sleeps": 2,
+        "price": 220,
+        "tone": "#3d4a52",
+        "blurb": "Step-free ground floor, roll-in shower, and a porch on the lee side.",
+        "amenities": ["Accessible", "Roll-in shower", "Porch"],
+    },
+]

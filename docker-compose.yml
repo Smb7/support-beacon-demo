@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITHUB_OWNER: ${GITHUB_OWNER:-Smb7}
+      GITHUB_REPO: ${GITHUB_REPO:-support-beacon-demo}
+      GITHUB_DISPATCH: ${GITHUB_DISPATCH:-false}
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
