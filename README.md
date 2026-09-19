@@ -19,7 +19,7 @@ Open http://localhost:3000
 4. With a token, the backend creates a GitHub issue on this repo.
 
 ```bash
-GITHUB_TOKEN=ghp_xxx GITHUB_OWNER=Smb7 GITHUB_REPO=support-beacon-demo docker compose up --build
+SUPPORT_BEACON_TOKEN=ghp_xxx GITHUB_OWNER=Smb7 GITHUB_REPO=support-beacon-demo docker compose up --build
 ```
 
 ## Stack
